@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/destinasi_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    card_view:cardCornerRadius="4dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/img_destinasi"
+            android:layout_width="130dp"
+            android:layout_height="155dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/tv_nama_wisata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@id/img_destinasi"
+            android:layout_toRightOf="@id/img_destinasi"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="@string/nameWisata" />
+
+        <TextView
+            android:id="@+id/tv_harga"
+            android:layout_width="218dp"
+            android:layout_height="26dp"
+            android:layout_above="@+id/layout_button"
+            android:layout_below="@id/tv_nama_wisata"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="36dp"
+            android:layout_toEndOf="@id/img_destinasi"
+            android:layout_toRightOf="@id/img_destinasi"
+            android:ellipsize="end"
+            tools:text="@string/harga" />
+
+        <TextView
+            android:id="@+id/tv_jmlpengunjung"
+            android:layout_width="218dp"
+            android:layout_height="26dp"
+            android:layout_above="@+id/layout_button"
+            android:layout_below="@id/tv_nama_wisata"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@id/img_destinasi"
+            android:layout_toRightOf="@id/img_destinasi"
+            android:ellipsize="end"
+            tools:text="@string/jumlah_pengunjung" />
+
+        <LinearLayout
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_toEndOf="@id/img_destinasi"
+            android:layout_toRightOf="@id/img_destinasi"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_pesan"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btn_pesan"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

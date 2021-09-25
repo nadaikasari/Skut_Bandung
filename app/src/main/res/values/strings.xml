@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">Skut Bandung</string>
+
+    //title bottom navigation
+    <string name="beranda">Beranda</string>
+    <string name="destinasi">Destinasi</string>
+    <string name="profil">Profil</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //login activity
+    <string name="hint_email">Email</string>
+    <string name="hint_pass">Password</string>
+    <string name="btn_login">LOGIN</string>
+
+    //user layout
+    <string name="nama">Nama Lengkap</string>
+    <string name="uid">UID</string>
+    <string name="email">Email</string>
+    <string name="notlpn">No Telephone</string>
+    <string name="saldo">Saldo</string>
+
+    //button
+    <string name="btn_edit">EDIT</string>
+    <string name="btn_delete">DELETE</string>
+    <string name="btn_update">UPDATE</string>
+
+    //kategori wisata
+    <string name="wisata">Wisata</string>
+    <string-array name="foto_wisata">
+        <item>@drawable/wisata_sejarah</item>
+        <item>@drawable/wisata_hiburan</item>
+        <item>@drawable/wisata_malam</item>
+        <item>@drawable/wisata_kecamatan</item>
+        <item>@drawable/wisata_semua</item>
+    </string-array>
+    <string-array name="nama_wisata">
+        <item>Wisata Sejarah</item>
+        <item>Wisata Hiburan</item>
+        <item>Wisata Malam</item>
+        <item>Wisata di Berbagai Kecamatan</item>
+        <item>Seluruh Kategori Wisata</item>
+    </string-array>
+
+    //destinasi
+    <string name="nameWisata">Nama Wisata</string>
+    <string name="harga">Harga</string>
+    <string name="jumlah_pengunjung">Jumlah Pengunjung</string>
+    <string name="btn_pesan">PESAN</string>
+    <string name="ket_destinasi">Keterangan Destinasi</string>
+    <string name="alamat">Alamat</string>
+    <string name="cuaca">Perkiraan Cuaca</string>
+    <string name="suhu">Suhu</string>
+    <string name="kelembapan">Kelembapan</string>
+    <string name="iklim">Iklim</string>
+    <string name="saran">Saran</string>
+
+    //home layout
+    <string name="selamat">SELAMAT DATANG</string>
+    <string name="saldo_anda">Saldo Anda</string>
+    <string name="btn_topup">TOP UP</string>
+
+
+</resources>
