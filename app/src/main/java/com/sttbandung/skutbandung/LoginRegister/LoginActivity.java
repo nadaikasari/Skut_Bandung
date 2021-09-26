@@ -45,8 +45,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText txtEmail, txtPass;
     Button login;
 
-    private RecyclerView recyclerView;
-    private UserAdapter adapter;
     private ArrayList<user> arrayList;
     private RequestQueue mRequestQueue;
     String url, id, name, uid, email, notlpn, image, saldo;
@@ -73,56 +71,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void getData() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("user");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject hit = jsonArray.getJSONObject(i);
-                                String id = hit.getString("id");
-                                name = hit.getString("nama");
-                                uid = hit.getString("uid");
-                                email = hit.getString("email");
-                                notlpn = hit.getString("nohp");
-                                image = hit.getString("foto");
-                                saldo = hit.getString("saldo");
-
-                                arrayList.add(new user(id, name, uid, email, notlpn, image, saldo));
-                            }
-                            adapter = new UserAdapter(arrayList, LoginActivity.this);
-                            recyclerView.setAdapter(adapter);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        mRequestQueue.add(request);
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void gotoMain() {
-        Bundle bundle = new Bundle();
-        bundle.putString("name", name);
-        bundle.putString("uid", uid);
-        bundle.putString("email", email);
-        bundle.putString("nohp", notlpn);
-        bundle.putString("image", image);
-        bundle.putString("saldo", saldo);
-
-        UserFragment fragobj = new UserFragment();
-        fragobj.setArguments(bundle);
-    }
-
 
     private class Login extends AsyncTask<Void, Void, Void> {
 
@@ -156,7 +104,13 @@ public class LoginActivity extends AppCompatActivity {
                     // looping through All Contacts
                     for (int i = 0; i < dataArray.length(); i++) {
                         JSONObject dataObj = dataArray.getJSONObject(i);
+                        uid = dataObj.getString("uid");
                         email = dataObj.getString("email");
+                        name = dataObj.getString("name");
+                        notlpn = dataObj.getString("nohp");
+                        image = dataObj.getString("foto");
+                        saldo = dataObj.getString("saldo");
+
                         if (dataObj == null) {
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -169,6 +123,12 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         } else {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("uid",uid);
+                            intent.putExtra("email",email);
+                            intent.putExtra("nama",name);
+                            intent.putExtra("tlpn",notlpn);
+                            intent.putExtra("foto",image);
+                            intent.putExtra("saldo",saldo);
                             startActivity(intent);
                         }
                     }

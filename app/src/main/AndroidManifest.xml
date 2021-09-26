@@ -13,8 +13,8 @@
         android:theme="@style/Theme.SkutBandung"
         android:usesCleartextTraffic="true">
         <activity android:name=".activity.DetailDestinasiActivity"></activity>
-        <activity android:name=".ListDestinasiActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".activity.ListDestinasiActivity" />
+        <activity android:name=".LoginRegister.RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginRegister.LoginActivity">
             <intent-filter>

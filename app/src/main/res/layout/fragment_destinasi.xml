@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="23dp"
-    android:layout_marginBottom="32dp"
+    android:layout_marginBottom="50dp"
     tools:context=".Fragment.DestinasiFragment">
 
     <androidx.recyclerview.widget.RecyclerView

@@ -24,7 +24,7 @@ import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    TextView text;
+    String nama_user, uid_user, email_user, tlpn_user, foto_user, saldo_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getFragmentPage(new BerandaFragment());
 
-        text = findViewById(R.id.texthallo);
+        //get data intent
+        Intent intent = getIntent();
+        nama_user = intent.getStringExtra("nama");
+        uid_user = intent.getStringExtra("uid");
+        email_user = intent.getStringExtra("email");
+        tlpn_user = intent.getStringExtra("tlpn");
+        foto_user = intent.getStringExtra("foto");
+        saldo_user = intent.getStringExtra("saldo");
+
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,4 +72,29 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    public String getNamaUser() {
+        return nama_user;
+    }
+
+    public String getUidUser() {
+        return uid_user;
+    }
+
+    public String getEmailUser() {
+        return email_user;
+    }
+
+    public String getTlpnUser() {
+        return tlpn_user;
+    }
+
+    public String getFotoUser() {
+        return foto_user;
+    }
+
+    public String getSaldoUser() {
+        return saldo_user;
+    }
+
 }

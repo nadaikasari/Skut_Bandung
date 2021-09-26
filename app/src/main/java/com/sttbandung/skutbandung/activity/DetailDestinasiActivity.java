@@ -1,26 +1,23 @@
 package com.sttbandung.skutbandung.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.sttbandung.skutbandung.R;
 
-import static com.sttbandung.skutbandung.ListDestinasiActivity.EXTRA_ALAMAT;
-import static com.sttbandung.skutbandung.ListDestinasiActivity.EXTRA_GAMBAR;
-import static com.sttbandung.skutbandung.ListDestinasiActivity.EXTRA_HARGA;
-import static com.sttbandung.skutbandung.ListDestinasiActivity.EXTRA_JUMLAH;
-import static com.sttbandung.skutbandung.ListDestinasiActivity.EXTRA_KELEMBAPAN;
-import static com.sttbandung.skutbandung.ListDestinasiActivity.EXTRA_KETERANGAN;
-import static com.sttbandung.skutbandung.ListDestinasiActivity.EXTRA_NAME;
-import static com.sttbandung.skutbandung.ListDestinasiActivity.EXTRA_SUHU;
+import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_ALAMAT;
+import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_GAMBAR;
+import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_HARGA;
+import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_JUMLAH;
+import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_KELEMBAPAN;
+import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_KETERANGAN;
+import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_NAME;
+import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_SUHU;
 
 public class DetailDestinasiActivity extends AppCompatActivity {
 

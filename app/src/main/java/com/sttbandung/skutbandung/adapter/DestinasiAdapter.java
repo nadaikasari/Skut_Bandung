@@ -13,12 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
-import com.sttbandung.skutbandung.ListDestinasiActivity;
 import com.sttbandung.skutbandung.R;
 import com.sttbandung.skutbandung.pojo.Destinasi;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DestinasiAdapter extends RecyclerView.Adapter<DestinasiAdapter.ViewHolder>{
 

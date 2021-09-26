@@ -1,8 +1,10 @@
-package com.sttbandung.skutbandung;
+package com.sttbandung.skutbandung.LoginRegister;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.sttbandung.skutbandung.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

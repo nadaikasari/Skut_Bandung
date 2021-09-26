@@ -9,10 +9,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    //login activity
+    //login and register activity
     <string name="hint_email">Email</string>
     <string name="hint_pass">Password</string>
+    <string name="hint_username">Username</string>
     <string name="btn_login">LOGIN</string>
+    <string name="register">REGISTER</string>
 
     //user layout
     <string name="nama">Nama Lengkap</string>
@@ -46,7 +48,7 @@
     //destinasi
     <string name="nameWisata">Nama Wisata</string>
     <string name="harga">Harga</string>
-    <string name="jumlah_pengunjung">Jumlah Pengunjung</string>
+    <string name="jumlah_pengunjung">Pengunjung</string>
     <string name="btn_pesan">PESAN</string>
     <string name="ket_destinasi">Keterangan Destinasi</string>
     <string name="alamat">Alamat</string>
@@ -60,6 +62,9 @@
     <string name="selamat">SELAMAT DATANG</string>
     <string name="saldo_anda">Saldo Anda</string>
     <string name="btn_topup">TOP UP</string>
+
+    //user beranda layout
+    <string name="welcome_text">Selamat Datang</string>
 
 
 </resources>

@@ -15,12 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
-import com.sttbandung.skutbandung.ListDestinasiActivity;
+import com.sttbandung.skutbandung.activity.ListDestinasiActivity;
 import com.sttbandung.skutbandung.R;
 import com.sttbandung.skutbandung.adapter.KategoriDestinasiAdapter;
 import com.sttbandung.skutbandung.pojo.KategoriDestinasi;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

@@ -1,30 +1,14 @@
-package com.sttbandung.skutbandung;
+package com.sttbandung.skutbandung.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,13 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
-import com.sttbandung.skutbandung.LoginRegister.LoginActivity;
-import com.sttbandung.skutbandung.activity.DetailDestinasiActivity;
+import com.sttbandung.skutbandung.R;
 import com.sttbandung.skutbandung.adapter.DestinasiAdapter;
-import com.sttbandung.skutbandung.adapter.KategoriDestinasiAdapter;
 import com.sttbandung.skutbandung.handler.Config;
-import com.sttbandung.skutbandung.handler.HttpHandler;
 import com.sttbandung.skutbandung.pojo.Destinasi;
 import com.sttbandung.skutbandung.pojo.KategoriDestinasi;
 
@@ -47,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ListDestinasiActivity extends AppCompatActivity implements DestinasiAdapter.OnItemClickListener{
 

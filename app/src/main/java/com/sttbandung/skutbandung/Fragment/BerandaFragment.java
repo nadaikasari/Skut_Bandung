@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.sttbandung.skutbandung.MainActivity;
 import com.sttbandung.skutbandung.R;
 
 /**
@@ -61,6 +63,22 @@ public class BerandaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_beranda, container, false);
+        View view = inflater.inflate(R.layout.fragment_beranda, container, false);
+        setHasOptionsMenu(true);
+
+        //get data from activity
+        MainActivity activity = (MainActivity) getActivity();
+        String DataNama = activity.getNamaUser();
+        String DataSaldo = activity.getSaldoUser();
+
+        //set view id
+        TextView welcome = (TextView) view.findViewById(R.id.welcome_text);
+        TextView saldo_user = (TextView) view.findViewById(R.id.saldo_user);
+
+        //set text with value
+        welcome.setText("Selamat Datang "+DataNama);
+        saldo_user.setText("Saldo Anda : Rp."+DataSaldo);
+
+        return view;
     }
 }
