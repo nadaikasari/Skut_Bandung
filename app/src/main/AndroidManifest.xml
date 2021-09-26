@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SkutBandung"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.TransaksiActivity"></activity>
+        <activity android:name=".activity.ListDestinasiKecamatan"></activity>
+        <activity android:name=".activity.TransaksiActivity" />
         <activity android:name=".activity.DetailDestinasiActivity" />
         <activity android:name=".activity.ListDestinasiActivity" />
         <activity android:name=".LoginRegister.RegisterActivity" />

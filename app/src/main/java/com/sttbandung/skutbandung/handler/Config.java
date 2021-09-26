@@ -8,6 +8,8 @@ public class Config {
     public static final String DESTINASI2 = DESTINASI+"Hiburan";
     public static final String DESTINASI3 = DESTINASI+"Malam";
     public static final String DESTINASIALL = BASE_URL+"destinasi";
+    public static final String DESTINASI_KATEGORI = BASE_URL+"kategori/kecamatan";
+
 
     public static final String LOGIN2 = BASE_URL+"login";
     public static final String TRANSAKSI = BASE_URL+"transaksi";

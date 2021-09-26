@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
+import com.sttbandung.skutbandung.MainActivity;
 import com.sttbandung.skutbandung.activity.ListDestinasiActivity;
 import com.sttbandung.skutbandung.R;
 import com.sttbandung.skutbandung.adapter.KategoriDestinasiAdapter;
@@ -85,6 +86,12 @@ public class DestinasiFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(AdapterDestinasi);
 
+        //get data from activity
+        MainActivity activity = (MainActivity) getActivity();
+        String DataId = activity.getIdUser();
+        String DataUid = activity.getUidUser();
+        String DataSaldo = activity.getSaldoUser();
+
         AdapterDestinasi.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view,int position){
@@ -95,6 +102,9 @@ public class DestinasiFragment extends Fragment {
 
                 Intent i = new Intent(getActivity(), ListDestinasiActivity.class);
                 i.putExtra("DESTINASI", coll);
+                i.putExtra("ID", DataId);
+                i.putExtra("UID", DataUid);
+                i.putExtra("SALDO", DataSaldo);
                 startActivity(i);
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
 

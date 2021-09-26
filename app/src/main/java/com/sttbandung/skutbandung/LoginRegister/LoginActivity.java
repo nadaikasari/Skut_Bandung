@@ -104,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                     // looping through All Contacts
                     for (int i = 0; i < dataArray.length(); i++) {
                         JSONObject dataObj = dataArray.getJSONObject(i);
+                        id = dataObj.getString("id");
                         uid = dataObj.getString("uid");
                         email = dataObj.getString("email");
                         name = dataObj.getString("name");
@@ -123,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         } else {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("id",id);
                             intent.putExtra("uid",uid);
                             intent.putExtra("email",email);
                             intent.putExtra("nama",name);

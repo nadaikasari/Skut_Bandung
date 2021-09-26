@@ -26,6 +26,7 @@ import com.sttbandung.skutbandung.Fragment.BerandaFragment;
 import com.sttbandung.skutbandung.Fragment.DestinasiFragment;
 import com.sttbandung.skutbandung.Fragment.UserFragment;
 import com.sttbandung.skutbandung.handler.Config;
+import com.sttbandung.skutbandung.pojo.user;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +37,7 @@ import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    String nama_user, uid_user, email_user, tlpn_user, foto_user, saldo_user;
+    String id_user, nama_user, uid_user, email_user, tlpn_user, foto_user, saldo_user;
     private RequestQueue mRequestQueue;
     private SwipeRefreshLayout doRefresh;
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         //get data intent
         Intent intent = getIntent();
         nama_user = intent.getStringExtra("nama");
+        id_user = intent.getStringExtra("id");
         uid_user = intent.getStringExtra("uid");
         email_user = intent.getStringExtra("email");
         tlpn_user = intent.getStringExtra("tlpn");
@@ -95,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public String getIdUser() {
+        return id_user;
     }
 
     public String getNamaUser() {

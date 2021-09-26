@@ -1,6 +1,7 @@
 package com.sttbandung.skutbandung.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
 import com.sttbandung.skutbandung.R;
+import com.sttbandung.skutbandung.activity.DetailDestinasiActivity;
+import com.sttbandung.skutbandung.activity.ListDestinasiActivity;
+import com.sttbandung.skutbandung.activity.TransaksiActivity;
 import com.sttbandung.skutbandung.pojo.Destinasi;
 
 import java.util.ArrayList;
@@ -52,6 +56,7 @@ public class DestinasiAdapter extends RecyclerView.Adapter<DestinasiAdapter.View
         holder.pengunjung.setText("Pengunjung : "+pengunjung);
         Picasso.get().load(images).fit().centerInside().into(holder.image);
 
+
     }
 
     @Override
@@ -62,6 +67,7 @@ public class DestinasiAdapter extends RecyclerView.Adapter<DestinasiAdapter.View
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }

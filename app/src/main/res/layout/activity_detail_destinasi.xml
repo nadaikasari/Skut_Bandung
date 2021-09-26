@@ -83,7 +83,7 @@
                     android:textSize="14sp"
                     android:layout_weight="1"
                     android:text="@string/alamat"
-                    android:id="@+id/alamat_destinasi"/>
+                    android:id="@+id/wisata_choice"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -185,6 +185,7 @@
         </TableLayout>
 
         <Button
+            android:id="@+id/btn_pesan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

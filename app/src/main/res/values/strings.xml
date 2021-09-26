@@ -59,12 +59,17 @@
     <string name="saran">Saran</string>
 
     //home layout
+    <string name="welcome_text">Selamat Datang</string>
     <string name="selamat">SELAMAT DATANG</string>
     <string name="saldo_anda">Saldo Anda</string>
     <string name="btn_topup">TOP UP</string>
 
-    //user beranda layout
-    <string name="welcome_text">Selamat Datang</string>
-
+    //transaksi activity
+    <string name="nama_wisata">Nama Wisata</string>
+    <string name="jumlah">Jumlah</string>
+    <string name="pembayaran">Pembayaran</string>
+    <string name="subttl">Sub Total</string>
+    <string name="total">Total Pembayaran</string>
+    <string name="btn_bayar">BUAT PESANAN</string>
 
 </resources>
