@@ -3,6 +3,7 @@ package com.sttbandung.skutbandung;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,10 +15,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sttbandung.skutbandung.Fragment.BerandaFragment;
 import com.sttbandung.skutbandung.Fragment.DestinasiFragment;
 import com.sttbandung.skutbandung.Fragment.UserFragment;
+import com.sttbandung.skutbandung.handler.Config;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,12 +37,15 @@ import java.util.Iterator;
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     String nama_user, uid_user, email_user, tlpn_user, foto_user, saldo_user;
+    private RequestQueue mRequestQueue;
+    private SwipeRefreshLayout doRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getFragmentPage(new BerandaFragment());
+        mRequestQueue = Volley.newRequestQueue(this);
 
         //get data intent
         Intent intent = getIntent();
@@ -40,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
         tlpn_user = intent.getStringExtra("tlpn");
         foto_user = intent.getStringExtra("foto");
         saldo_user = intent.getStringExtra("saldo");
+
+//        refresh color method
+        doRefresh = findViewById(R.id.swipe_refresh);
+        doRefresh.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -60,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        doRefresh.setOnRefreshListener(this::updateSaldo);
 
     }
 
@@ -94,7 +118,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String getSaldoUser() {
+        updateSaldo();
         return saldo_user;
+    }
+
+
+    private void updateSaldo() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Config.LOGIN + email_user, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("user");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject hit = jsonArray.getJSONObject(i);
+                                String saldo = hit.getString("saldo");
+                                doRefresh.setRefreshing(false);
+                                saldo_user = saldo;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mRequestQueue.add(request);
     }
 
 }

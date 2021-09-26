@@ -57,4 +57,7 @@ dependencies {
     // below line is used for image loading library
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //refresh layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 }

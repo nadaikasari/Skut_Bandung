@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,8 +34,11 @@ import com.squareup.picasso.Picasso;
 import com.sttbandung.skutbandung.LoginRegister.LoginActivity;
 import com.sttbandung.skutbandung.MainActivity;
 import com.sttbandung.skutbandung.R;
+import com.sttbandung.skutbandung.activity.ListDestinasiActivity;
+import com.sttbandung.skutbandung.adapter.DestinasiAdapter;
 import com.sttbandung.skutbandung.adapter.UserAdapter;
 import com.sttbandung.skutbandung.handler.Config;
+import com.sttbandung.skutbandung.pojo.Destinasi;
 import com.sttbandung.skutbandung.pojo.user;
 
 import org.json.JSONArray;
@@ -60,9 +64,7 @@ public class UserFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ImageView img;
-    private TextView nama, uid_user;
-    private Button btn_update;
+
 
     public UserFragment() {
         // Required empty public constructor
@@ -127,14 +129,7 @@ public class UserFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        img = view.findViewById(R.id.image_user);
-        nama = view.findViewById(R.id.nama_lengkap);
-        uid_user = view.findViewById(R.id.uid);
-        btn_update = view.findViewById(R.id.btn_edit_profil);
 
-    }
+
 
 }

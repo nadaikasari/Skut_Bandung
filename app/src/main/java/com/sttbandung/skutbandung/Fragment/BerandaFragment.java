@@ -3,14 +3,26 @@ package com.sttbandung.skutbandung.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.sttbandung.skutbandung.MainActivity;
 import com.sttbandung.skutbandung.R;
+import com.sttbandung.skutbandung.handler.Config;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +39,10 @@ public class BerandaFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RequestQueue mRequestQueue;
+    private SwipeRefreshLayout doRefresh;
+    String locate, newSaldo;
 
     public BerandaFragment() {
         // Required empty public constructor
@@ -80,5 +96,6 @@ public class BerandaFragment extends Fragment {
         saldo_user.setText("Saldo Anda : Rp."+DataSaldo);
 
         return view;
+
     }
 }
