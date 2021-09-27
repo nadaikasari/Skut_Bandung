@@ -1,13 +1,11 @@
-package com.sttbandung.skutbandung.LoginRegister;
+package com.sttbandung.skutbandung.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -16,16 +14,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.sttbandung.skutbandung.Fragment.UserFragment;
 import com.sttbandung.skutbandung.MainActivity;
 import com.sttbandung.skutbandung.R;
-import com.sttbandung.skutbandung.adapter.UserAdapter;
 import com.sttbandung.skutbandung.handler.Config;
 import com.sttbandung.skutbandung.handler.HttpHandler;
 import com.sttbandung.skutbandung.pojo.user;
@@ -35,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 

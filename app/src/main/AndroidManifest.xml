@@ -3,6 +3,7 @@
     package="com.sttbandung.skutbandung">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -12,18 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SkutBandung"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ListDestinasiKecamatan"></activity>
+        <activity android:name=".activity.TopupActivity" />
+        <activity android:name=".activity.ListDestinasiKecamatan" />
         <activity android:name=".activity.TransaksiActivity" />
         <activity android:name=".activity.DetailDestinasiActivity" />
         <activity android:name=".activity.ListDestinasiActivity" />
-        <activity android:name=".LoginRegister.RegisterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoginRegister.LoginActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".pojo.Capture"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme">
+
         </activity>
     </application>
 

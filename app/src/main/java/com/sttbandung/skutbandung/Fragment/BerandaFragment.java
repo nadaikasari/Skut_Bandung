@@ -1,5 +1,7 @@
 package com.sttbandung.skutbandung.Fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +10,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -18,6 +21,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.sttbandung.skutbandung.MainActivity;
 import com.sttbandung.skutbandung.R;
+import com.sttbandung.skutbandung.activity.TopupActivity;
 import com.sttbandung.skutbandung.handler.Config;
 
 import org.json.JSONArray;
@@ -90,12 +94,28 @@ public class BerandaFragment extends Fragment {
         //set view id
         TextView welcome = (TextView) view.findViewById(R.id.welcome_text);
         TextView saldo_user = (TextView) view.findViewById(R.id.saldo_user);
+        Button btn_topup = (Button) view.findViewById(R.id.btn_topup);
 
         //set text with value
         welcome.setText("Selamat Datang "+DataNama);
         saldo_user.setText("Saldo Anda : Rp."+DataSaldo);
 
+        btn_topup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToNewActivity();
+            }
+        });
+
         return view;
+
+
+    }
+
+    private void moveToNewActivity () {
+        Intent i = new Intent(getActivity(), TopupActivity.class);
+        startActivity(i);
+        ((Activity) getActivity()).overridePendingTransition(0, 0);
 
     }
 }

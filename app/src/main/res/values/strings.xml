@@ -72,4 +72,9 @@
     <string name="total">Total Pembayaran</string>
     <string name="btn_bayar">BUAT PESANAN</string>
 
+    //topup saldo
+    <string name="id_voucher">Masukan nomor voucher</string>
+    <string name="or">Or</string>
+    <string name="btn_scan">Scan QR Code</string>
+
 </resources>
