@@ -17,8 +17,10 @@ import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
 import com.sttbandung.skutbandung.R;
 import com.sttbandung.skutbandung.activity.DetailDestinasiActivity;
 import com.sttbandung.skutbandung.activity.ListDestinasiActivity;
+import com.sttbandung.skutbandung.activity.RiwayatTransaksiActivity;
 import com.sttbandung.skutbandung.activity.TransaksiActivity;
 import com.sttbandung.skutbandung.pojo.Destinasi;
+import com.sttbandung.skutbandung.pojo.RiwayatTransaksi;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,16 @@ public class DestinasiAdapter extends RecyclerView.Adapter<DestinasiAdapter.View
     public DestinasiAdapter(ArrayList<Destinasi> arrayList, Context context) {
         ArrayList = arrayList;
         this.context = context;
+    }
+
+    // method for filtering our recyclerview items.
+    public void filterList(ArrayList<Destinasi> filterllist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        ArrayList = filterllist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -55,7 +67,6 @@ public class DestinasiAdapter extends RecyclerView.Adapter<DestinasiAdapter.View
         holder.harga.setText("Harga : "+harga);
         holder.pengunjung.setText("Pengunjung : "+pengunjung);
         Picasso.get().load(images).fit().centerInside().into(holder.image);
-
 
     }
 

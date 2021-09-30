@@ -19,16 +19,7 @@ public class KecamatanDestinasiAdapter extends RecyclerView.Adapter<KecamatanDes
     private ArrayList<Kecamatan> kecamatans;
     private ItemClickListener itemClickListener;
     private Context context;
-    private OnItemClickListener kListener;
 
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        kListener = listener;
-    }
 
     public KecamatanDestinasiAdapter(ArrayList<Kecamatan> kecamatans, Context context) {
         this.kecamatans = kecamatans;
@@ -58,12 +49,18 @@ public class KecamatanDestinasiAdapter extends RecyclerView.Adapter<KecamatanDes
         this.itemClickListener=itemClickListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView kecamatan;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             kecamatan = itemView.findViewById(R.id.nama_kecamatan);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(itemClickListener!=null)
+                itemClickListener.onClick(v,getAdapterPosition());
         }
     }
 }

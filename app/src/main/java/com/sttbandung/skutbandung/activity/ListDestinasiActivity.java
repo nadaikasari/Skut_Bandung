@@ -6,9 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,6 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
+import com.sttbandung.skutbandung.MainActivity;
 import com.sttbandung.skutbandung.R;
 import com.sttbandung.skutbandung.adapter.DestinasiAdapter;
 import com.sttbandung.skutbandung.adapter.KategoriDestinasiAdapter;
@@ -31,7 +41,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ListDestinasiActivity extends AppCompatActivity implements DestinasiAdapter.OnItemClickListener{
+public class ListDestinasiActivity extends AppCompatActivity implements DestinasiAdapter.OnItemClickListener {
 
     public static final String EXTRA_NAME = "nama_destinasi";
     public static final String EXTRA_JUMLAH = "jumlah_pengunjung";
@@ -53,8 +63,8 @@ public class ListDestinasiActivity extends AppCompatActivity implements Destinas
     private ArrayList<Destinasi> arrayList;
     private ArrayList<Kecamatan> arrayListKecamatan;
     private RequestQueue mRequestQueue;
-    private RequestQueue mRequestQueue2;
-    private ProgressDialog pDialog;
+    private MenuItem item;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,26 +91,27 @@ public class ListDestinasiActivity extends AppCompatActivity implements Destinas
 
         getData();
 
-        if(kategori.equals("Wisata di Berbagai Kecamatan")) {
-            config= Config.DESTINASI_KATEGORI;
+        if (kategori.equals("Wisata di Berbagai Kecamatan")) {
+            config = Config.DESTINASI_KATEGORI;
             ArrayName = "Kategori";
             getKecamatan();
         }
+
 
     }
 
 
     private void getData() {
-        if (kategori.equals("Wisata Sejarah")){
+        if (kategori.equals("Wisata Sejarah")) {
             config = Config.DESTINASI1;
             ArrayName = "destinasicategori";
-        } else if (kategori.equals("Wisata Hiburan")){
+        } else if (kategori.equals("Wisata Hiburan")) {
             config = Config.DESTINASI2;
             ArrayName = "destinasicategori";
-        } else if (kategori.equals("Wisata Malam")){
+        } else if (kategori.equals("Wisata Malam")) {
             config = Config.DESTINASI3;
             ArrayName = "destinasicategori";
-        } else if (kategori.equals("Seluruh Kategori Wisata")){
+        } else if (kategori.equals("Seluruh Kategori Wisata")) {
             config = Config.DESTINASIALL;
             ArrayName = "destinasi";
         }
@@ -143,7 +154,7 @@ public class ListDestinasiActivity extends AppCompatActivity implements Destinas
         mRequestQueue.add(request);
     }
 
-    public void getKecamatan(){
+    public void getKecamatan() {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, config, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -159,7 +170,12 @@ public class ListDestinasiActivity extends AppCompatActivity implements Destinas
                             }
                             adapterKecamatan = new KecamatanDestinasiAdapter(arrayListKecamatan, ListDestinasiActivity.this);
                             recyclerView.setAdapter(adapterKecamatan);
-//                            adapterKecamatan.setOnItemClickListener(ListDestinasiActivity.this);
+                            adapterKecamatan.setItemClickListener(new ItemClickListener() {
+                                @Override
+                                public void onClick(View view, int position) {
+                                    Toast.makeText(ListDestinasiActivity.this, "", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -200,5 +216,57 @@ public class ListDestinasiActivity extends AppCompatActivity implements Destinas
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_option_menu, menu);
+
+        //search listener
+        MenuItem searchItem = menu.findItem(R.id.search);
+//            SearchView searchView = (SearchView) searchItem.getActionView();
+//            searchView.setQueryHint(getResources().getString(R.string.search_hint));
+//            // below line is to call set on query text listener method.
+//            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//                @Override
+//                public boolean onQueryTextSubmit(String query) {
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean onQueryTextChange(String newText) {
+//                    // inside on query text change method we are
+//                    // calling a method to filter our recycler view.
+//                    filter(newText);
+//                    return false;
+//                }
+//            });
+        return true;
+    }
+
+    private void filter(String text) {
+        // creating a new array list to filter our data.
+        ArrayList<Destinasi> filteredlist = new ArrayList<>();
+
+        // running a for loop to compare elements.
+        for (Destinasi item : arrayList) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getNama().toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item);
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            adapter.filterList(filteredlist);
+        }
+    }
+
 
 }

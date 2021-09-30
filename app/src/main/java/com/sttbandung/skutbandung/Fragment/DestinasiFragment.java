@@ -18,6 +18,7 @@ import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
 import com.sttbandung.skutbandung.MainActivity;
 import com.sttbandung.skutbandung.activity.ListDestinasiActivity;
 import com.sttbandung.skutbandung.R;
+import com.sttbandung.skutbandung.activity.ListDestinasiKecamatan;
 import com.sttbandung.skutbandung.adapter.KategoriDestinasiAdapter;
 import com.sttbandung.skutbandung.pojo.KategoriDestinasi;
 
@@ -100,13 +101,13 @@ public class DestinasiFragment extends Fragment {
 
                 coll.setNama_destinasi(nama);
 
-                Intent i = new Intent(getActivity(), ListDestinasiActivity.class);
-                i.putExtra("DESTINASI", coll);
-                i.putExtra("ID", DataId);
-                i.putExtra("UID", DataUid);
-                i.putExtra("SALDO", DataSaldo);
-                startActivity(i);
-                ((Activity) getActivity()).overridePendingTransition(0, 0);
+                    Intent i = new Intent(getActivity(), ListDestinasiActivity.class);
+                    i.putExtra("DESTINASI", coll);
+                    i.putExtra("ID", DataId);
+                    i.putExtra("UID", DataUid);
+                    i.putExtra("SALDO", DataSaldo);
+                    startActivity(i);
+                    ((Activity) getActivity()).overridePendingTransition(0, 0);
 
             }
         });

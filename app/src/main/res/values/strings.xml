@@ -57,6 +57,8 @@
     <string name="kelembapan">Kelembapan</string>
     <string name="iklim">Iklim</string>
     <string name="saran">Saran</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Cari Nama Destinasi</string>
 
     //home layout
     <string name="welcome_text">Selamat Datang</string>
@@ -76,5 +78,15 @@
     <string name="id_voucher">Masukan nomor voucher</string>
     <string name="or">Or</string>
     <string name="btn_scan">Scan QR Code</string>
+
+    <string name="transaksi1">Transaksi Belum Terpakai</string>
+    <string name="transaksi2">Transaksi Ditunda</string>
+    <string name="transaksi3">Transaksi Sudah Terpakai</string>
+    <string name="transaksi_judul">Transaksi</string>
+    <string name="nilai">0</string>
+    <string name="btn_transaksi">Lihat Semua Transaksi</string>
+    <string name="recomed_destinasi">Rekomendasi Destinasi</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="status">Status</string>
 
 </resources>
