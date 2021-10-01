@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import com.sttbandung.skutbandung.pojo.RiwayatTransaksi;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,8 +96,9 @@ public class BerandaFragment extends Fragment {
         String DataNama = activity.getNamaUser();
         String DataSaldo = activity.getSaldoUser();
         String DataID = activity.getIdUser();
-
-
+        String DataTransaksiSudah = activity.getStatusSudah();
+        String DataTransaksiBelum = activity.getStatusBelum();
+        
         //set view id
         TextView welcome = (TextView) view.findViewById(R.id.welcome_text);
         TextView saldo_user = (TextView) view.findViewById(R.id.saldo_user);
@@ -106,8 +110,10 @@ public class BerandaFragment extends Fragment {
         Button btn_riwayat_transaksi = (Button) view.findViewById(R.id.button_Semuatransaksi);
 
         //set text with value
-        welcome.setText("Selamat Datang "+DataNama);
-        saldo_user.setText("Saldo Anda : Rp."+DataSaldo);
+        welcome.setText("Selamat Datang " + DataNama);
+        saldo_user.setText("Saldo Anda : Rp." + DataSaldo);
+        transaksi_belum_terpakai.setText(DataTransaksiBelum);
+        transaksi_selesai.setText(DataTransaksiSudah);
 
 
         btn_topup.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +127,7 @@ public class BerandaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), RiwayatTransaksiActivity.class);
-                i.putExtra("ID_USER",DataID);
+                i.putExtra("ID_USER", DataID);
                 startActivity(i);
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
@@ -131,63 +137,13 @@ public class BerandaFragment extends Fragment {
 
     }
 
-    private void MovetoTopupActivity () {
+    private void MovetoTopupActivity() {
         Intent i = new Intent(getActivity(), TopupActivity.class);
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0, 0);
     }
 
-    private void countData() {
-        MainActivity activity = (MainActivity) getActivity();
-        String DataID = activity.getIdUser();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Config.RIWAYAT_TRANSAKSI + DataID, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("transaksi");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject hit = jsonArray.getJSONObject(i);
-                                String create_at = hit.getString("created_att");
-                                String status = hit.getString("status");
-                                String uid = hit.getString("id_destinasi");
 
-                                JsonObjectRequest request2 = new JsonObjectRequest(Request.Method.GET, Config.DESTINASI_ID + uid, null,
-                                        new Response.Listener<JSONObject>() {
-                                            @Override
-                                            public void onResponse(JSONObject response) {
-                                                try {
-                                                    JSONArray jsonArray = response.getJSONArray("destinasi");
-                                                    for (int i = 0; i < jsonArray.length(); i++) {
-                                                        JSONObject hit2 = jsonArray.getJSONObject(i);
-                                                        String nama_destinasi = hit2.getString("nama_destinasi");
-                                                    }
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        error.printStackTrace();
-                                    }
-                                });
-                                mRequestQueue.add(request2);
-
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        mRequestQueue.add(request);
-    }
 
 
 }

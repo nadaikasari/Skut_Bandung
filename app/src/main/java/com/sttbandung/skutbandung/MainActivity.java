@@ -37,7 +37,7 @@ import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    String id_user, nama_user, uid_user, email_user, tlpn_user, foto_user, saldo_user;
+    String id_user, nama_user, uid_user, email_user, tlpn_user, foto_user, saldo_user, statusBelum, statusSudah;
     private RequestQueue mRequestQueue;
     private SwipeRefreshLayout doRefresh;
 
@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         tlpn_user = intent.getStringExtra("tlpn");
         foto_user = intent.getStringExtra("foto");
         saldo_user = intent.getStringExtra("saldo");
+
+        hitungTransaksiSelesai();
+        hitungTransaksiBelumSelesai();
 
 //        refresh color method
         doRefresh = findViewById(R.id.swipe_refresh);
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
 
         doRefresh.setOnRefreshListener(this::updateSaldo);
 
@@ -128,6 +132,13 @@ public class MainActivity extends AppCompatActivity {
         return saldo_user;
     }
 
+    public String getStatusBelum() {
+        return statusBelum;
+    }
+
+    public String getStatusSudah() {
+        return statusSudah;
+    }
 
     private void updateSaldo() {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Config.LOGIN + email_user, null,
@@ -142,6 +153,50 @@ public class MainActivity extends AppCompatActivity {
                                 doRefresh.setRefreshing(false);
                                 saldo_user = saldo;
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mRequestQueue.add(request);
+    }
+
+    private void hitungTransaksiSelesai() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Config.TRANSAKSI_STATUS1 + id_user, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("transaksi");
+                                int totalCount = jsonArray.length();
+                                statusSudah = String.valueOf(totalCount);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mRequestQueue.add(request);
+    }
+
+    private void hitungTransaksiBelumSelesai() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Config.TRANSAKSI_STATUS2 + id_user, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("transaksi");
+                            int totalCount = jsonArray.length();
+                            statusBelum = String.valueOf(totalCount);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
