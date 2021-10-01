@@ -37,7 +37,7 @@ import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    String id_user, nama_user, uid_user, email_user, tlpn_user, foto_user, saldo_user, statusBelum, statusSudah;
+    String id_user, nama_user, uid_user, email_user, tlpn_user, foto_user, saldo_user, statusBelum, statusSudah, statusDitunda;
     private RequestQueue mRequestQueue;
     private SwipeRefreshLayout doRefresh;
 
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         hitungTransaksiSelesai();
         hitungTransaksiBelumSelesai();
+        hitungTransaksiDitunda();
 
 //        refresh color method
         doRefresh = findViewById(R.id.swipe_refresh);
@@ -140,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
         return statusSudah;
     }
 
+    public String getStatusDitunda() {
+        return statusDitunda;
+    }
+
     private void updateSaldo() {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Config.LOGIN + email_user, null,
                 new Response.Listener<JSONObject>() {
@@ -197,6 +202,28 @@ public class MainActivity extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("transaksi");
                             int totalCount = jsonArray.length();
                             statusBelum = String.valueOf(totalCount);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mRequestQueue.add(request);
+    }
+
+    private void hitungTransaksiDitunda() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Config.TRANSAKSI_STATUS3 + id_user, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("transaksi");
+                            int totalCount = jsonArray.length();
+                            statusDitunda = String.valueOf(totalCount);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

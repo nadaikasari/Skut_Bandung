@@ -44,6 +44,7 @@ import java.util.ArrayList;
 public class ListDestinasiActivity extends AppCompatActivity implements DestinasiAdapter.OnItemClickListener {
 
     public static final String EXTRA_NAME = "nama_destinasi";
+    public static final String EXTRA_ID_DESTINASI = "id_destinasi";
     public static final String EXTRA_JUMLAH = "jumlah_pengunjung";
     public static final String EXTRA_GAMBAR = "gambar_destinasi";
     public static final String EXTRA_ALAMAT = "alamat_destinasi";
@@ -194,6 +195,7 @@ public class ListDestinasiActivity extends AppCompatActivity implements Destinas
         Intent i = new Intent(this, DetailDestinasiActivity.class);
         Destinasi clickedItem = arrayList.get(position);
         i.putExtra(EXTRA_NAME, clickedItem.getNama());
+        i.putExtra(EXTRA_ID_DESTINASI, clickedItem.getId());
         i.putExtra(EXTRA_JUMLAH, clickedItem.getPengunjung());
         i.putExtra(EXTRA_GAMBAR, clickedItem.getGambar());
         i.putExtra(EXTRA_ALAMAT, clickedItem.getAlamat());

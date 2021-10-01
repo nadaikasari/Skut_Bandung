@@ -61,4 +61,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
 
+    //json
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+
 }

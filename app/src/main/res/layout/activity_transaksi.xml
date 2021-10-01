@@ -77,6 +77,7 @@
             <EditText
                 android:id="@+id/jumlah_tiket"
                 android:layout_width="match_parent"
+                android:inputType = "number"
                 android:hint="@string/jumlah"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -182,7 +183,7 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_pesan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

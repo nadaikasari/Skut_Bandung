@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.sttbandung.skutbandung.R;
 import com.google.zxing.Result;
 import com.sttbandung.skutbandung.adapter.DestinasiAdapter;
@@ -33,6 +37,7 @@ public class TopupActivity extends AppCompatActivity {
 
     private Button btn_voucher, btn_scanqr;
     private EditText isi_voucher;
+    private String id_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,10 @@ public class TopupActivity extends AppCompatActivity {
         isi_voucher = findViewById(R.id.edit_idvoucher);
         btn_voucher = findViewById(R.id.btn_loadvoucher);
         btn_scanqr = findViewById(R.id.btn_openScan);
+
+        //get intent
+        Intent intent = getIntent();
+        id_user = intent.getStringExtra("ID_USER");
 
         btn_scanqr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,14 +69,11 @@ public class TopupActivity extends AppCompatActivity {
         btn_voucher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Topup();
             }
         });
     }
 
-    public void topUp(){
-
-    }
 
 
     @Override
@@ -92,6 +98,24 @@ public class TopupActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "OOPS.. Kamu salah", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void Topup() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("id_user", id_user);
+        params.put("id_voucher", isi_voucher.getText());
+        client.put(Config.TOP_UP, params,  new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
+                Log.d("onSuccess: ", "BERHASIL");
+            }
+
+            @Override
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
     }
 
 

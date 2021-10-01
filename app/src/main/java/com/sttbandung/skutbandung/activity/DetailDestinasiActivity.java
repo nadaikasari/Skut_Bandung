@@ -16,6 +16,7 @@ import com.sttbandung.skutbandung.R;
 import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_ALAMAT;
 import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_GAMBAR;
 import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_HARGA;
+import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_ID_DESTINASI;
 import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_ID_USER;
 import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_JUMLAH;
 import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_KELEMBAPAN;
@@ -38,6 +39,7 @@ public class DetailDestinasiActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String image = intent.getStringExtra(EXTRA_GAMBAR);
+        String id_des = intent.getStringExtra(EXTRA_ID_DESTINASI);
         String nama = intent.getStringExtra(EXTRA_NAME);
         String pengunjung = intent.getStringExtra(EXTRA_JUMLAH);
         String alamat = intent.getStringExtra(EXTRA_ALAMAT);
@@ -75,6 +77,7 @@ public class DetailDestinasiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(DetailDestinasiActivity.this, TransaksiActivity.class);
                 i.putExtra("nama_des", nama_destinasi.getText());
+                i.putExtra("id_destinasi", id_des);
                 i.putExtra("harga", harga);
                 i.putExtra("id", id);
                 i.putExtra("uid", uid);

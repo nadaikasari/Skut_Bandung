@@ -98,7 +98,8 @@ public class BerandaFragment extends Fragment {
         String DataID = activity.getIdUser();
         String DataTransaksiSudah = activity.getStatusSudah();
         String DataTransaksiBelum = activity.getStatusBelum();
-        
+        String DataTransaksiDitunda = activity.getStatusDitunda();
+
         //set view id
         TextView welcome = (TextView) view.findViewById(R.id.welcome_text);
         TextView saldo_user = (TextView) view.findViewById(R.id.saldo_user);
@@ -114,12 +115,16 @@ public class BerandaFragment extends Fragment {
         saldo_user.setText("Saldo Anda : Rp." + DataSaldo);
         transaksi_belum_terpakai.setText(DataTransaksiBelum);
         transaksi_selesai.setText(DataTransaksiSudah);
+        transaksi_ditunda.setText(DataTransaksiDitunda);
 
 
         btn_topup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MovetoTopupActivity();
+                Intent i = new Intent(getActivity(), TopupActivity.class);
+                i.putExtra("ID_USER", DataID);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
         });
 
@@ -136,14 +141,5 @@ public class BerandaFragment extends Fragment {
         return view;
 
     }
-
-    private void MovetoTopupActivity() {
-        Intent i = new Intent(getActivity(), TopupActivity.class);
-        startActivity(i);
-        ((Activity) getActivity()).overridePendingTransition(0, 0);
-    }
-
-
-
 
 }
