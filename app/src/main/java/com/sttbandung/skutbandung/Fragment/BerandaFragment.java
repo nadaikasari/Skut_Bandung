@@ -1,37 +1,26 @@
 package com.sttbandung.skutbandung.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.sttbandung.skutbandung.MainActivity;
-import com.sttbandung.skutbandung.R;
 import com.sttbandung.skutbandung.activity.RiwayatTransaksiActivity;
 import com.sttbandung.skutbandung.activity.TopupActivity;
-import com.sttbandung.skutbandung.adapter.RiwayatTransaksiAdapter;
-import com.sttbandung.skutbandung.handler.Config;
-import com.sttbandung.skutbandung.pojo.RiwayatTransaksi;
+import com.sttbandung.skutbandung.databinding.FragmentBerandaBinding;
+import com.sttbandung.skutbandung.mvvm.BerandaViewModel;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,9 +38,6 @@ public class BerandaFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RequestQueue mRequestQueue;
-    private SwipeRefreshLayout doRefresh;
-    String locate, newSaldo;
 
     public BerandaFragment() {
         // Required empty public constructor
@@ -84,62 +70,99 @@ public class BerandaFragment extends Fragment {
         }
     }
 
+    private FragmentBerandaBinding binding;
+    private BerandaViewModel viewModel;
+
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_beranda, container, false);
+        binding = FragmentBerandaBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
         setHasOptionsMenu(true);
 
         //get data from activity
         MainActivity activity = (MainActivity) getActivity();
         String DataNama = activity.getNamaUser();
-        String DataSaldo = activity.getSaldoUser();
         String DataID = activity.getIdUser();
-        String DataTransaksiSudah = activity.getStatusSudah();
-        String DataTransaksiBelum = activity.getStatusBelum();
-        String DataTransaksiDitunda = activity.getStatusDitunda();
+        String DataEmail = activity.getEmailUser();
 
-        //set view id
-        TextView welcome = (TextView) view.findViewById(R.id.welcome_text);
-        TextView saldo_user = (TextView) view.findViewById(R.id.saldo_user);
-        TextView transaksi_belum_terpakai = (TextView) view.findViewById(R.id.jumlah_transaksi1);
-        TextView transaksi_ditunda = (TextView) view.findViewById(R.id.jumlah_transaksi2);
-        TextView transaksi_selesai = (TextView) view.findViewById(R.id.jumlah_transaksi3);
+        viewModel = new ViewModelProvider(this).get(BerandaViewModel.class);
+        viewModel.getSaldoUser(DataEmail);
+        getDataSaldoUser();
 
-        Button btn_topup = (Button) view.findViewById(R.id.btn_topup);
-        Button btn_riwayat_transaksi = (Button) view.findViewById(R.id.button_Semuatransaksi);
+        viewModel.getStatusDone(DataID);
+        getTransaksiDone();
+
+        viewModel.getStatusDelayed(DataID);
+        getTransaksiDelayed();
+
+        viewModel.getStatusUnUsed(DataID);
+        getTransaksiNotUsed();
 
         //set text with value
-        welcome.setText("Selamat Datang " + DataNama);
-        saldo_user.setText("Saldo Anda : Rp." + DataSaldo);
-        transaksi_belum_terpakai.setText(DataTransaksiBelum);
-        transaksi_selesai.setText(DataTransaksiSudah);
-        transaksi_ditunda.setText(DataTransaksiDitunda);
+        binding.welcomeText.setText("Selamat Datang \n" + DataNama);
 
+        viewModel.isLoading().observe(getViewLifecycleOwner(), this::showLoading);
+        viewModel.messageError().observe(getViewLifecycleOwner(), this::showMessage);
 
-        btn_topup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), TopupActivity.class);
-                i.putExtra("ID_USER", DataID);
-                startActivity(i);
-                ((Activity) getActivity()).overridePendingTransition(0, 0);
-            }
+        binding.btnTopup.setOnClickListener((View.OnClickListener) v -> {
+            Intent i = new Intent(getActivity(), TopupActivity.class);
+            i.putExtra("ID_USER", DataID);
+            startActivity(i);
+            ((Activity) getActivity()).overridePendingTransition(0, 0);
         });
 
-        btn_riwayat_transaksi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), RiwayatTransaksiActivity.class);
-                i.putExtra("ID_USER", DataID);
-                startActivity(i);
-                ((Activity) getActivity()).overridePendingTransition(0, 0);
-            }
+        binding.buttonSemuatransaksi.setOnClickListener((View.OnClickListener) v -> {
+            Intent i = new Intent(getActivity(), RiwayatTransaksiActivity.class);
+            i.putExtra("ID_USER", DataID);
+            startActivity(i);
+            ((Activity) getActivity()).overridePendingTransition(0, 0);
         });
 
         return view;
+    }
 
+    private void getTransaksiDone() {
+        viewModel.getTransaksiDone().observe(getViewLifecycleOwner(), _ResultTransaksiDone -> binding.jumlahTransaksi3.setText(String.valueOf(_ResultTransaksiDone)));
+    }
+
+    private void getTransaksiDelayed() {
+        viewModel.getTransaksiDelayed().observe(getViewLifecycleOwner(), _ResultTransaksiDelayed -> binding.jumlahTransaksi2.setText(String.valueOf(_ResultTransaksiDelayed)));
+    }
+
+    private void getTransaksiNotUsed() {
+        viewModel.getTransaksiNotUsed().observe(getViewLifecycleOwner(), _ResultTransaksiNotUsed -> binding.jumlahTransaksi1.setText(String.valueOf(_ResultTransaksiNotUsed)));
+    }
+
+    private void getDataSaldoUser() {
+        viewModel.getResultSaldo().observe(getViewLifecycleOwner(), _ResultSaldoUser -> binding.saldoUser.setText("Saldo Anda : " + formatRupiah(Double.valueOf(_ResultSaldoUser))));
+    }
+
+    private void showLoading(Boolean isLoading) {
+        if (isLoading) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+        } else {
+            binding.progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Menampilkan pesan error
+     */
+    private void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Format angka menjadi rupiah
+     */
+    private String formatRupiah(Double number) {
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+        return formatRupiah.format(number);
     }
 
 }

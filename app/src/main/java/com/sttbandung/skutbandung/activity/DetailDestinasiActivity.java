@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.sttbandung.skutbandung.MainActivity;
 import com.sttbandung.skutbandung.R;
+import com.sttbandung.skutbandung.databinding.ActivityDetailDestinasiBinding;
 
 import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_ALAMAT;
 import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_GAMBAR;
@@ -27,6 +28,8 @@ import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_SU
 import static com.sttbandung.skutbandung.activity.ListDestinasiActivity.EXTRA_UID_USER;
 
 public class DetailDestinasiActivity extends AppCompatActivity {
+
+    private ActivityDetailDestinasiBinding binding;
 
     private ImageView gambar_destinasi;
     private TextView nama_destinasi, harga_destinasi, keterangan_destinasi, alamat_destinasi, jumlah_pengunjung, suhu_destinasi, kelembapan_destinasi, saran;

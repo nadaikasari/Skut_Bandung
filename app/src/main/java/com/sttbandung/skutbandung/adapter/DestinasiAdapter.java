@@ -1,7 +1,6 @@
 package com.sttbandung.skutbandung.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
 import com.sttbandung.skutbandung.R;
-import com.sttbandung.skutbandung.activity.DetailDestinasiActivity;
-import com.sttbandung.skutbandung.activity.ListDestinasiActivity;
-import com.sttbandung.skutbandung.activity.RiwayatTransaksiActivity;
-import com.sttbandung.skutbandung.activity.TransaksiActivity;
 import com.sttbandung.skutbandung.pojo.Destinasi;
-import com.sttbandung.skutbandung.pojo.RiwayatTransaksi;
 
 import java.util.ArrayList;
 
 public class DestinasiAdapter extends RecyclerView.Adapter<DestinasiAdapter.ViewHolder>{
 
     private ArrayList<Destinasi> ArrayList;
-    private ItemClickListener itemClickListener;
     private Context context;
     private OnItemClickListener mListener;
 
@@ -36,15 +29,6 @@ public class DestinasiAdapter extends RecyclerView.Adapter<DestinasiAdapter.View
         this.context = context;
     }
 
-    // method for filtering our recyclerview items.
-    public void filterList(ArrayList<Destinasi> filterllist) {
-        // below line is to add our filtered
-        // list in our course array list.
-        ArrayList = filterllist;
-        // below line is to notify our adapter
-        // as change in recycler view data.
-        notifyDataSetChanged();
-    }
 
     @NonNull
     @Override

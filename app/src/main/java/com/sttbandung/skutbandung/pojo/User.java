@@ -1,12 +1,15 @@
 package com.sttbandung.skutbandung.pojo;
 
-public class user {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class User implements Parcelable {
     private String id, nama, uid, email, notlpn, image, saldo;
 
-    public user() {
+    public User() {
     }
 
-    public user(String id, String nama, String uid, String email, String notlpn, String image, String saldo) {
+    public User(String id, String nama, String uid, String email, String notlpn, String image, String saldo) {
         this.id = id;
         this.nama = nama;
         this.uid = uid;
@@ -15,6 +18,28 @@ public class user {
         this.image = image;
         this.saldo = saldo;
     }
+
+    protected User(Parcel in) {
+        id = in.readString();
+        nama = in.readString();
+        uid = in.readString();
+        email = in.readString();
+        notlpn = in.readString();
+        image = in.readString();
+        saldo = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -70,5 +95,21 @@ public class user {
 
     public void setSaldo(String saldo) {
         this.saldo = saldo;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(nama);
+        dest.writeString(uid);
+        dest.writeString(email);
+        dest.writeString(notlpn);
+        dest.writeString(image);
+        dest.writeString(saldo);
     }
 }

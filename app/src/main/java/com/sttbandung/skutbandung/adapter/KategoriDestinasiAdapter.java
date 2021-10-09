@@ -17,10 +17,9 @@ import com.sttbandung.skutbandung.pojo.KategoriDestinasi;
 import java.util.ArrayList;
 
 public class KategoriDestinasiAdapter extends RecyclerView.Adapter<KategoriDestinasiAdapter.ViewHolder>{
-    private ArrayList<KategoriDestinasi> kategoriDestinasis;
-    private Context context;
+    private final ArrayList<KategoriDestinasi> kategoriDestinasis;
+    private final Context context;
     private ItemClickListener itemClickListener;
-    private RecyclerView recyclerView;
 
     public KategoriDestinasiAdapter(ArrayList<KategoriDestinasi> kategoriDestinasis, Context context) {
         this.kategoriDestinasis = kategoriDestinasis;
@@ -32,8 +31,7 @@ public class KategoriDestinasiAdapter extends RecyclerView.Adapter<KategoriDesti
     public KategoriDestinasiAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view= LayoutInflater.from(viewGroup.getContext()).
                 inflate(R.layout.list_kategori_destinasi,viewGroup,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override

@@ -61,7 +61,7 @@
     <string name="search_hint">Cari Nama Destinasi</string>
 
     //home layout
-    <string name="welcome_text">Selamat Datang</string>
+    <string name="welcome_text">Selamat Datang, </string>
     <string name="selamat">SELAMAT DATANG</string>
     <string name="saldo_anda">Saldo Anda</string>
     <string name="btn_topup">TOP UP</string>
@@ -82,7 +82,7 @@
     <string name="transaksi1">Transaksi Belum Terpakai</string>
     <string name="transaksi2">Transaksi Ditunda</string>
     <string name="transaksi3">Transaksi Sudah Terpakai</string>
-    <string name="transaksi_judul">Transaksi</string>
+    <string name="transaksi_judul">Riwayat Transaksi</string>
     <string name="nilai">0</string>
     <string name="btn_transaksi">Lihat Semua Transaksi</string>
     <string name="recomed_destinasi">Rekomendasi Destinasi</string>

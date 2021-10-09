@@ -15,21 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sttbandung.skutbandung.ClickListener.ItemClickListener;
 import com.sttbandung.skutbandung.R;
-import com.sttbandung.skutbandung.pojo.Destinasi;
-import com.sttbandung.skutbandung.pojo.user;
+import com.sttbandung.skutbandung.pojo.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
-    private ArrayList<user> ArrayList;
+    private ArrayList<User> ArrayList;
     private ItemClickListener itemClickListener;
     private Context context;
     private AdapterView.OnItemClickListener mListener;
-    private user data;
+    private User data;
 
-    public UserAdapter(java.util.ArrayList<user> arrayList, Context context) {
+    public UserAdapter(java.util.ArrayList<User> arrayList, Context context) {
         ArrayList = arrayList;
         this.context = context;
     }
@@ -72,7 +71,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
     }
 
-    public void addData(List<user> data) {
+    public void addData(List<User> data) {
         ArrayList.addAll(data);
         notifyDataSetChanged();
     }

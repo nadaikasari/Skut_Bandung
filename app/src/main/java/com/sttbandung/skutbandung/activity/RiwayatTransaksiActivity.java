@@ -14,12 +14,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.sttbandung.skutbandung.R;
-import com.sttbandung.skutbandung.adapter.DestinasiAdapter;
-import com.sttbandung.skutbandung.adapter.KecamatanDestinasiAdapter;
 import com.sttbandung.skutbandung.adapter.RiwayatTransaksiAdapter;
 import com.sttbandung.skutbandung.handler.Config;
-import com.sttbandung.skutbandung.pojo.Destinasi;
-import com.sttbandung.skutbandung.pojo.Kecamatan;
 import com.sttbandung.skutbandung.pojo.RiwayatTransaksi;
 
 import org.json.JSONArray;
@@ -33,7 +29,6 @@ public class RiwayatTransaksiActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RiwayatTransaksiAdapter adapter;
     private ArrayList<RiwayatTransaksi> arrayList;
-    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
