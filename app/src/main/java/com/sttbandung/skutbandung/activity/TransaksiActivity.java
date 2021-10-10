@@ -12,21 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Header;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.sttbandung.skutbandung.R;
 import com.sttbandung.skutbandung.handler.Config;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 public class TransaksiActivity extends AppCompatActivity {
 
     private TextView wisata, harga, sub_total, saldo, total;
     private EditText jumlah;
-    private Button Pesan;
     private String user_id, user_uid, id_destinasi;
     private int jmltoDouble;
 
@@ -49,7 +44,7 @@ public class TransaksiActivity extends AppCompatActivity {
         saldo = findViewById(R.id.sisa_saldo);
         total = findViewById(R.id.ttl_pembayaran);
         jumlah = findViewById(R.id.jumlah_tiket);
-        Pesan = findViewById(R.id.button_pesan);
+        Button pesan = findViewById(R.id.button_pesan);
 
         wisata.setText(destinasi_name);
         harga.setText("Rp. "+destinasi_harga);
@@ -80,7 +75,7 @@ public class TransaksiActivity extends AppCompatActivity {
         });
 
 
-        Pesan.setOnClickListener(new View.OnClickListener() {
+        pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < jmltoDouble; i++) {
